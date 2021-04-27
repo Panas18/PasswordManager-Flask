@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block content %}
+    {% for data in datas %}
+        {{ data.app }}
+        {{ data.email }}
+        {{ data.username }}
+        {{ data.password }}
+    {% endfor %}
+{% endblock content %}
