@@ -1,0 +1,58 @@
+.content-section {
+    border: 1px solid rgba(133, 125, 111, 0.867);
+    border-radius: 3px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background-color:#ffffff;
+}
+
+body {
+    background: #fafafa;
+}
+
+.container {
+    margin-left: 13%;
+    margin-right: 13%;
+}
+
+.add_password {
+    background-color: green;
+    margin-right: 13%;
+    text-align: center;
+}
+
+.media {
+    color: white;
+    background-color: rgb(48, 40, 40);
+}
+
+.bg-dark {
+    color: rgb(12, 11, 9);
+}
+
+.content-app {
+    text-align: left;
+}
+
+.content-date {
+    font-size: small;
+    vertical-align: middle;
+    padding-top: 0.4%;
+}
+
+.content-head {
+    color:black;
+}
+
+.content-email{
+    color:black;
+}
+.form-section {
+    border: 1px solid rgba(133, 125, 111, 0.867);
+    border-radius: 3px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    margin-right: 39%;
+    background-color:#ffffff ;
+    color:black;
+}

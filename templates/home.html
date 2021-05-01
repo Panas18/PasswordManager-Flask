@@ -1,9 +1,27 @@
 {% extends 'layout.html' %}
 {% block content %}
-    {% for data in datas %}
-        {{ data.app }}
-        {{ data.email }}
-        {{ data.username }}
-        {{ data.password }}
-    {% endfor %}
+    <div class='row'>
+        <div class='col-md-6'>
+            {% for data in datas %}
+                <div class='content-section'>
+                    <div class="content-head row">
+                        <div class='content-app col-md-3'>
+                           <a href="#">{{ data.app }}</a> 
+                        </div>
+                        <div class='text-muted content-date'>
+                            {{ data.date_posted }}
+                        </div>
+                    </div>
+                    <div >
+                        <a class='content-email' href="#">{{data.email}}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class='col-md-5'>
+            <div class='add_password'>
+                <h1>add_password</h1>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
+from form import RegistrationForm, LoginForm
 
 app = Flask(__name__)
 
@@ -7,13 +8,19 @@ datas = [
         'app': 'Facebook',
         'username': 'Panas',
         'email': 'panas@demo.com',
-        'password': 'facebookpassword'
+        'url': "www.facebook.com",
+        'password': 'facebookpassword',
+        'type': 'login',
+        'date_posted': '2019-2-3'
     },
     {
         'app': 'Gmail',
         'username': 'Panas18',
+        'url': 'www.google.com',
         'email': 'panas2@demo.com',
         'password': 'gmailPassword',
+        'type': 'login',
+        'date_posted': '2020-4-8'
 
     }
 ]
@@ -29,24 +36,21 @@ def account():
     return render_template('account.html', title="Account")
 
 
-@app.route('/add')
-def add():
-    return render_template('add.html', title="Account")
-
-
 @app.route('/logout')
 def logout():
-    return render_template('logout.html', title="Account")
+    return render_template('logout.html', title="logout")
 
 
 @app.route('/login')
 def login():
-    return render_template('login.html', title="Account")
+    form=LoginForm
+    return render_template('login.html', title="Login", form=form)
 
 
 @app.route('/register')
 def register():
-    return render_template('register.html', title="Account")
+    form = RegistrationForm()
+    return render_template('register.html', title="Register", form=form)
 
 
 if __name__ == "__main__":
