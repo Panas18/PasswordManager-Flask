@@ -12,7 +12,7 @@ class RegistrationForm(Form):
     confirm_password = PasswordField('Confirm Password',
                                      [validators.DataRequired(),
                                       validators.EqualTo('password')])
-    submit = SubmitField('Register')
+    submit = SubmitField('Submit')
 
 
 class LoginForm(Form):

@@ -1,27 +1,42 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class='form-section'>
-    <legend class='mb-4 border-bottom'>Join Today</legend>
-    <form>
-        <fieldset class='form-group'>
-            <div class="form-group">
-                {{ form.username.label ( class='form-control-label') }}
-                {{form.username ( class='form-control') }}
-            </div>
-            <div class="form-group">
-                {{ form.email.label ( class='form-control-label') }}
-                {{form.email ( class='form-control') }}
-            </div>
-            <div class="form-group">
-                {{ form.password.label( class='form-control-label') }}
-                {{form.password( class='form-control') }}
-            </div>
-            <div class="form-group">
-                {{ form.confirm_password.label( class='form-control-label') }}
-                {{form.confirm_password( class='form-control') }}
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </fieldset>
-    </form>
-</div>
+    <div class='form-section'>
+        <form method="POST" action=''>
+            {{ form.hidden_tag }}
+            <fieldset class='form-group'>
+                <legend class='mb-4 border-bottom'>Join Today</legend>
+                <div class="form-group">
+                    {{ form.username.label ( class='form-control-label') }}
+                    {% if form.username.errors %}
+                        {{form.username ( class='form-control') }}
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{form.username ( class='form-control') }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label ( class='form-control-label') }}
+                    {{form.email ( class='form-control') }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label( class='form-control-label') }}
+                    {{form.password( class='form-control') }}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label( class='form-control-label') }}
+                    {{form.confirm_password( class='form-control') }}
+                </div>
+                <div class='form-group'>
+                    {{ form.submit (class='btn btn-primary') }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class='border-top mt-3 right-margin'>
+        <small>Already have an account?
+            <a class='ml-1' href="{{ url_for('login') }}">Login</a>
+        </small>
+    </div>
 {% endblock content %}

@@ -1,7 +1,11 @@
 from flask import Flask, render_template, url_for
 from form import RegistrationForm, LoginForm
+import os
+
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
 datas = [
     {
@@ -27,6 +31,7 @@ datas = [
 
 
 @app.route('/')
+@app.route('/home')
 def home():
     return render_template('home.html', title='Home', datas=datas)
 
@@ -47,7 +52,7 @@ def login():
     return render_template('login.html', title="Login", form=form)
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'] )
 def register():
     form = RegistrationForm()
     return render_template('register.html', title="Register", form=form)
