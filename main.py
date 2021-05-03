@@ -1,6 +1,6 @@
-from flask import Flask, render_template, url_for
-from form import RegistrationForm, LoginForm
+from flask import Flask, render_template, url_for, flash, redirect, request
 import os
+from form import LoginForm, RegistrationForm
 
 
 app = Flask(__name__)
@@ -43,19 +43,24 @@ def account():
 
 @app.route('/logout')
 def logout():
-    return render_template('logout.html', title="logout")
+    return redirect(url_for('login'))
 
-
-@app.route('/login')
-def login():
-    form = LoginForm()
-    return render_template('login.html', title="Login", form=form)
-
-
-@app.route('/register', methods=['GET', 'POST'] )
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    return render_template('register.html', title="Register", form=form)
+    if request.method == "POST" and form.validate():
+        flash('Your account has been created', 'success')
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if request.method == "POST" and form.validate():
+        flash("login is successful", 'success')
+        return redirect(url_for('home'))
+    return render_template('login.html', title="Login", form=form)
 
 
 if __name__ == "__main__":
