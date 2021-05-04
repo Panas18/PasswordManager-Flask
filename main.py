@@ -4,10 +4,10 @@ from form import LoginForm, RegistrationForm
 
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 
-datas = [
+posts= [
     {
         'app': 'Facebook',
         'username': 'Panas',
@@ -33,7 +33,7 @@ datas = [
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html', title='Home', datas=datas)
+    return render_template('home.html', title='Home', posts=posts)
 
 
 @app.route('/account')
@@ -44,6 +44,7 @@ def account():
 @app.route('/logout')
 def logout():
     return redirect(url_for('login'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

@@ -2,18 +2,18 @@
 {% block content %}
     <div class='row'>
         <div class='col-md-6'>
-            {% for data in datas %}
+            {% for post in posts %}
                 <div class='content-section'>
                     <div class="content-head row">
                         <div class='content-app col-md-3'>
-                           <a href="#">{{ data.app }}</a> 
+                           <a href="#">{{ post.app }}</a> 
                         </div>
                         <div class='text-muted content-date'>
-                            {{ data.date_posted }}
+                            {{ post.date_posted }}
                         </div>
                     </div>
                     <div >
-                        <a class='content-email' href="#">{{data.email}}</a>
+                        <a class='content-email' href="#">{{post.email}}</a>
                     </div>
                 </div>
             {% endfor %}
