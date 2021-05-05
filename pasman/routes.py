@@ -1,7 +1,8 @@
 from flask import render_template, url_for, flash, redirect, request
-from pasman import app
+from pasman import app, db
 from pasman.models import User, Post
 from pasman.forms import RegistrationForm, LoginForm
+
 
 posts = [
     {
@@ -46,6 +47,11 @@ def logout():
 def register():
     form = RegistrationForm()
     if request.method == "POST" and form.validate():
+        user = User(username=form.username.data,
+                    email=form.email.data,
+                    password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
         flash('Your account has been created', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
@@ -55,6 +61,15 @@ def register():
 def login():
     form = LoginForm()
     if request.method == "POST" and form.validate():
-        flash("login is successful", 'success')
-        return redirect(url_for('home'))
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            if user.password == form.password.data:
+                flash("login is successful", 'success')
+                return redirect(url_for('home'))
+            else:
+                flash("Your password is incorrect. Please try again!", 'danger')
+                return redirect(url_for('login'))
+        else:
+            flash("Your email is not registeres on our database", 'danger')
+            return redirect(url_for('login')) 
     return render_template('login.html', title="Login", form=form)
