@@ -1,13 +1,9 @@
-from flask import Flask, render_template, url_for, flash, redirect, request
-import os
-from form import LoginForm, RegistrationForm
+from flask import render_template, url_for, flash, redirect, request
+from pasman import app
+from pasman.models import User, Post
+from pasman.forms import RegistrationForm, LoginForm
 
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
-
-posts= [
+posts = [
     {
         'app': 'Facebook',
         'username': 'Panas',
@@ -62,7 +58,3 @@ def login():
         flash("login is successful", 'success')
         return redirect(url_for('home'))
     return render_template('login.html', title="Login", form=form)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
