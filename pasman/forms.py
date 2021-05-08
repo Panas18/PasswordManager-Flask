@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, ValidationError
 from wtforms.validators import (DataRequired, Email,
                                 Length, EqualTo)
-
+from pasman.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField("Username",
@@ -18,6 +18,18 @@ class RegistrationForm(FlaskForm):
                                                  EqualTo('password',
                                                          message="Both the password must be equal.")])
     submit = SubmitField('Submit')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(
+                "Email is already taken. Please choose another one")
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError(
+                "Username is already taken. Please choose another one")
 
 
 class LoginForm(FlaskForm):
