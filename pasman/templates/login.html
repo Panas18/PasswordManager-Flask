@@ -1,5 +1,14 @@
 {% extends 'layout.html' %}
 {% block content %}
+<div class='right-margin'>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class='alert alert-{{ category }} flash-message'> {{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
 <div class='form-section'>
     <legend class='mb-4 border-bottom'>Login</legend>
     <form method="POST" action="#">
