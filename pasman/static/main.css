@@ -3,7 +3,7 @@
     border-radius: 3px;
     padding: 10px 20px;
     margin-bottom: 10px;
-    background-color:#ffffff;
+    background-color: #ffffff;
 }
 
 body {
@@ -41,22 +41,27 @@ body {
 }
 
 .content-head {
-    color:black;
+    color: black;
 }
 
-.content-email{
-    color:black;
+.content-email {
+    color: black;
 }
+
 .form-section {
     border: 1px solid rgba(133, 125, 111, 0.867);
     border-radius: 3px;
     padding: 10px 20px;
     margin-bottom: 10px;
     margin-right: 39%;
-    background-color:#ffffff ;
-    color:black;
+    background-color: #ffffff;
+    color: black;
 }
 
-.right-margin{
+.right-margin {
     margin-right: 39%;
+}
+
+.flash-message {
+    text-align: center;
 }
