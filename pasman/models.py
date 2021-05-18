@@ -29,3 +29,4 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post({self.app}, {self.username}, {self.email})"
+

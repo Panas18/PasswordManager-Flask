@@ -15,12 +15,6 @@ body {
     margin-right: 13%;
 }
 
-.add_password {
-    background-color: green;
-    margin-right: 13%;
-    text-align: center;
-}
-
 .media {
     color: white;
     background-color: rgb(48, 40, 40);
@@ -64,4 +58,27 @@ body {
 
 .flash-message {
     text-align: center;
+}
+
+.form-section-add-password {
+    margin-right: 23%;
+    border: 1px solid rgba(133, 125, 111, 0.867);
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+
+.pl-2 {
+    padding-left: 2%;
+}
+
+.mt-1 {
+    margin-top: 1%;
+    padding-left:1%;
+    padding-right:1%;
+}
+.content-section-form {
+    border: 1px solid rgba(133, 125, 111, 0.867);
+    border-radius: 3px;
+    background-color: #ffffff;
+    margin-right: 24%;
 }

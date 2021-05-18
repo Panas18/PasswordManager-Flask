@@ -22,7 +22,7 @@
     <header>
         <nav class='navbar navbar-dark bg-dark navbar-expand-md fixed-top'>
             <div class='container'>
-                <a class='navbar-brand' href="{{ url_for('home') }}">Password Manager</a>
+                <a class='navbar-brand' href='/'>Password Manager</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,18 +33,22 @@
                         <a class='nav-item nav-link' href="{{ url_for('home') }}">Home</a>
                         <a class='nav-item nav-link' href="{{ url_for('account') }}">Account</a>
                     </div>
-
-                    <div class='align-items-center col-auto'>
-                        <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </div>
+                    {% if current_user.is_authenticated %}
+                        <div class='align-items-center col-auto'>
+                            <form class="form-inline my-2 my-lg-0">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                        </div>
+                    {% endif %}
 
                     <div class='navbar-nav'>
+                    {% if current_user.is_authenticated %}
                         <a class='nav-item nav-link' href="{{ url_for('logout') }}">Logout</a>
+                    {% else %}
                         <a class='nav-item nav-link' href="{{ url_for('login') }}">Login</a>
                         <a class='nav-item nav-link' href="{{ url_for('register') }}">Register</a>
+                    {% endif %}
                     </div>
                 </div>
             </div>
@@ -66,6 +70,36 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script>
+        let password_length = document.getElementById('password_len');
+        let password = document.getElementById('password');
+        let return_length = document.getElementById('length');
+        return_length.innerHTML = password_length.value;
+
+        password_length.oninput= function(){
+            return_length.innerHTML = this.value;
+            let generated_password = generate_password(password_length.value);
+            password.value = generated_password;
+        }
+
+        function generate_password( length ){
+            char = '';
+
+            for(let i=32; i<=126; i++){
+                char+= String.fromCharCode(i);
+            }
+
+            let generated_password = '';
+
+            for(let i=0, n = char.length; i<length; i++){
+                generated_password += char.charAt(Math.floor(Math.random() * n));
+            }
+            return generated_password;
+        }
+
+
+
+    </script>
 </body>
 
 </html>

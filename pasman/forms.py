@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, ValidationError, BooleanField
 from wtforms.validators import (DataRequired, Email,
                                 Length, EqualTo)
 from pasman.models import User
+from wtforms.fields.html5 import IntegerRangeField
 
 class RegistrationForm(FlaskForm):
     username = StringField("Username",
@@ -37,3 +38,13 @@ class LoginForm(FlaskForm):
 
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Register')
+
+
+class AddPostForm(FlaskForm):
+    app = StringField("Application")
+    username = StringField('Username')
+    email = StringField('Email')
+    password = PasswordField("Password", validators=[Length(min=5)])
+    password_len = IntegerRangeField("Password_len", default=8)
+    generate = BooleanField('Generate Password')
+    submit = SubmitField('Save')
