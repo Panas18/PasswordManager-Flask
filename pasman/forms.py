@@ -5,6 +5,7 @@ from wtforms.validators import (DataRequired, Email,
 from pasman.models import User
 from wtforms.fields.html5 import IntegerRangeField
 
+
 class RegistrationForm(FlaskForm):
     username = StringField("Username",
                            validators=[DataRequired(),
@@ -37,6 +38,7 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
 
     password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField("Remember Me")
     submit = SubmitField('Register')
 
 
@@ -44,7 +46,8 @@ class AddPostForm(FlaskForm):
     app = StringField("Application")
     username = StringField('Username')
     email = StringField('Email')
-    password = PasswordField("Password", validators=[Length(min=5)])
+    password = PasswordField("Password")
     password_len = IntegerRangeField("Password_len", default=8)
-    generate = BooleanField('Generate Password')
+    generate = BooleanField('Generate')
+    view = BooleanField('View Password')
     submit = SubmitField('Save')

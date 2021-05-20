@@ -39,6 +39,7 @@
                 {% else %}
                     {{ form.password (class='form-control') }}
                 {% endif %}
+                {{ form.remember }} {{form.remember.label}}
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </fieldset>

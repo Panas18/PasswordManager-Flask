@@ -35,8 +35,9 @@
                     {{ form.username (placeholder=form.username.label.text, class='col-xl-12') }}
                     {{ form.email (placeholder=form.email.label.text , class='col-xl-12') }}
                     {{ form.password (placeholder=form.password.label.text , class='col-xl-12') }}
-                    {{ form.password_len(value=8, min=5, max=128) }} Length: <span id='length'></span> 
-                    Generate Password ? {{ form.generate }}
+                    {{ form.password_len(value=8, min=5, max=50, disabled=True) }} <span id='length'></span> 
+                    {{form.generate.label (class='m-1 ml-1')}} {{ form.generate }}
+                    {{ form.view.label (class='ml-3')}} {{ form.view }}
                     <div class='mt-1 mb-1'>
                         {{ form.submit (class='btn btn-outline-primary') }} 
                     </div>

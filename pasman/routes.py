@@ -3,8 +3,6 @@ from pasman import app, db
 from pasman.models import User, Post
 from pasman.forms import RegistrationForm, LoginForm, AddPostForm
 from flask_login import login_user, login_required, logout_user, current_user
-import string
-import random
 
 posts = [
     {
@@ -71,19 +69,14 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             if user.password == form.password.data:
-                login_user(user)
+                login_user(user, remember=form.remember.data)
                 flash("login is successful", 'success')
                 next_page = request.args.get('next')
                 return redirect(next_page) if next_page else redirect(url_for('home'))
             else:
                 flash("Your password is incorrect. Please try again!", 'danger')
                 return redirect(url_for('login'))
+        else:
             flash("Your email is not registered our database", 'danger')
             return redirect(url_for('login'))
     return render_template('login.html', title="Login", form=form)
-
-
-def generate_password(length):
-    password_char = string.ascii_letters + string.punctuation + string.digits
-    password = ''.join(random.choice(password_char) for _ in range(length))
-    return password
